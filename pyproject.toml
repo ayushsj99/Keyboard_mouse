@@ -1,0 +1,14 @@
+[project]
+name = "keyboard-mouse"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "darkdetect>=0.8.0",
+    "keyboard>=0.13.5",
+    "pyautogui>=0.9.54",
+    "pyinstaller>=6.14.2",
+    "pynput>=1.8.1",
+    "pystray>=0.19.5",
+]
