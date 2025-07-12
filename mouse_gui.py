@@ -21,18 +21,17 @@ CONFIG_FILE = "mouse_mode_config.json"
 # === Default config ===
 default_config = {
     "mouse_speed": 20,
-    "scroll_speed": 50,
-    "left_click_key": "j",
-    "right_click_key": "k",
-    "scroll_up_key": "i",
-    "scroll_down_key": "m",
+    "scroll_speed": 100,
+    "left_click_combo": "j",
+    "right_click_combo": "k",
+    "scroll_up_combo": "i",
+    "scroll_down_combo": "m",
     "movement_keys": {
         "w": [0, -1],
         "s": [0, 1],
         "a": [-1, 0],
         "d": [1, 0]
     },
-    "trigger_key": "caps lock",
     "acceleration_enabled": True,
     "acceleration_factor": 100,
     "max_speed": 200,
@@ -87,13 +86,12 @@ class MouseSettingsGUI:
 
         # === General Tab ===
         self._add_spinbox(general_tab, "Mouse Speed", "mouse_speed", 1, 500)
-        self._add_spinbox(general_tab, "Scroll Speed", "scroll_speed", 1, 200)
-        for key in ["left_click_key", "right_click_key", "scroll_up_key", "scroll_down_key"]:
-            self._add_entry(general_tab, key.replace("_", " ").title(), key)
+        self._add_spinbox(general_tab, "Scroll Speed", "scroll_speed", 1, 500)
 
-        ttk.Label(general_tab, text="Movement Keys (W/A/S/D):").pack(anchor='w', pady=5)
-        for key in ["w", "a", "s", "d"]:
-            self._add_entry(general_tab, f"Move '{key.upper()}' key", key, config_path="movement_keys")
+        ttk.Label(general_tab, text="Key Mappings:").pack(anchor='w', pady=10)
+        ttk.Label(general_tab, text="Movement: W/A/S/D", foreground="gray").pack(anchor='w')
+        ttk.Label(general_tab, text="Scroll: I (Up), M (Down)", foreground="gray").pack(anchor='w')
+        ttk.Label(general_tab, text="Click: J (Left), K (Right)", foreground="gray").pack(anchor='w')
 
         # === Advanced Tab ===
         self.accel_var = tk.BooleanVar(value=self.config.get("acceleration_enabled", True))
@@ -108,7 +106,7 @@ class MouseSettingsGUI:
         self._add_entry(advanced_tab, "Tap Threshold (seconds)", "tap_threshold", value_type=float)
 
         # === Actions Tab ===
-        ttk.Button(actions_tab, text="💾 Save Settings", command=self._save).pack(pady=5, fill='x')
+        ttk.Button(actions_tab, text="💾 Save Settings", command=self._save).pack(pady=10, fill='x')
         ttk.Button(actions_tab, text="🔄 Reset to Default", command=self._reset_defaults).pack(pady=5, fill='x')
         ttk.Button(actions_tab, text="❌ Exit", command=self.root.quit).pack(pady=5, fill='x')
 
@@ -144,9 +142,9 @@ class MouseSettingsGUI:
                 self._enable_auto_start()
 
             save_config(self.config)
-            messagebox.showinfo("Success", "Settings saved successfully!")
+            messagebox.showinfo("✅ Success", "Settings saved successfully!")
         except Exception as e:
-            messagebox.showerror("Error", str(e))
+            messagebox.showerror("❌ Error", str(e))
 
     def _reset_defaults(self):
         self.config = default_config.copy()
@@ -180,14 +178,11 @@ class MouseSettingsGUI:
 
         icon = pystray.Icon("MouseControl", icon_image, "Mouse Control", menu)
         threading.Thread(target=icon.run, daemon=True).start()
-        
+
 def launch_gui():
     root = tk.Tk()
     app = MouseSettingsGUI(root)
     root.mainloop()
 
-
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = MouseSettingsGUI(root)
-    root.mainloop()
+    launch_gui()
