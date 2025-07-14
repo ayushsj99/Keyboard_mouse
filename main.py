@@ -16,7 +16,7 @@ def start_trigger_listener():
 if __name__ == "__main__":
     print("🎮 Starting Mouse Mode System...")
     print("🔀 Trigger = Shift + Right Arrow")
-    print("🖥️  GUI will open for configuration.\n")
+    print("🖥️ GUI will open for configuration.\n")
 
     # Start background systems first
     start_mouse_mode()
