@@ -34,6 +34,7 @@ Perfect for accessibility, productivity, or just having fun with tech.
 > Install dependencies:
 ```bash
 pip install -r requirements.txt
+```
 
 ## 📊 Case Study & Impact Analysis
 
