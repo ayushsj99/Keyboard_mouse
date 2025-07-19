@@ -22,7 +22,7 @@ Perfect for accessibility, productivity, or just having fun with tech.
 
 ### ✅ From Executable (Recommended)
 
-1. [Download the latest release](#) *(Add your link here)*
+1. Go to -> Download: dist/keyboard_mouse.exe (in current repo) or [Download the latest release](#) *(Add your link here)* 
 2. Run the `keyboard_mouse.exe` file
 3. The GUI opens on startup, and you can toggle mouse mode with `Shift + →`
 
